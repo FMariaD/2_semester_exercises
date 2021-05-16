@@ -224,15 +224,15 @@ int benchmark(SortFunction f, uint64_t n) {
 int main()
 {
     int n, i, time, average_time;
-    ofstream fout("Shell_sort.csv", ios_base::out);
+    ofstream fout("std_sort.csv", ios_base::out);
     fout << "iteration,time\n";
-    for (n = 100; n < 20000; n = n + 20)
+    for (n = 1000; n < 1000000; n = n + 1000)
     {
         average_time = 0;
         // считаем 10 раз для одного значения n, чтобы усреднить по времени
         for (i = 0; i < 10; i++)
         {
-            time = benchmark(Shell_sort, n);
+            time = benchmark(std_sort, n);
             average_time += time;
         }
         average_time = average_time / 10;
