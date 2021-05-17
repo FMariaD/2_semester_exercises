@@ -204,7 +204,11 @@ int benchmark(SortFunction f, uint64_t n) {
     auto v = generate_random_vector(n);
     auto start = steady_clock::now();
     //время засекается внутри этого блока
-    f(v);
+    f(v, 0, v.size()-1);
+    for (int i = 0; i<v.size(); i++)
+    {
+        cout << v[i] << " ";
+    }
     auto finish = steady_clock::now();
     //for (int i = 0; i < v.size(); i++)
     //{
@@ -224,15 +228,15 @@ int benchmark(SortFunction f, uint64_t n) {
 int main()
 {
     int n, i, time, average_time;
-    ofstream fout("std_sort.csv", ios_base::out);
+    ofstream fout("merge_sort.csv", ios_base::out);
     fout << "iteration,time\n";
-    for (n = 1000; n < 1000000; n = n + 1000)
+    for (n = 10; n < 1000000; n = n + 1000)
     {
         average_time = 0;
         // считаем 10 раз для одного значения n, чтобы усреднить по времени
         for (i = 0; i < 10; i++)
         {
-            time = benchmark(std_sort, n);
+            time = benchmark(merge_sort, n);
             average_time += time;
         }
         average_time = average_time / 10;
